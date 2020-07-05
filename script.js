@@ -29,7 +29,6 @@ async function getQuote() {
 
         if (quoteTextIsDuplicated(responseData.quoteText)) {
             showLoadingSpiner()
-            console.log('quote was duplicated')
             duplicatedQuoteRequestCounter < 20 ? getQuote() : goTo404Page()
             
         } else {
@@ -37,7 +36,6 @@ async function getQuote() {
             reduceFontSizeForLongQuote(responseData.quoteText)
             assingQuoteText(responseData)
             hideLoadingSpiner()
-            throw new Error('bub')
         }
         
     } catch (error) {
