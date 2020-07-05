@@ -12,9 +12,7 @@ function showLoadingSpiner() {
 }
 
 function hideLoadingSpiner() {
-    if (!loader.hidden) cancelAnimation()
-    
-    function cancelAnimation() {
+    if (!loader.hidden) {
         quoteContainer.hidden = false
         loader.hidden = true
     }
@@ -24,7 +22,6 @@ function hideLoadingSpiner() {
 let requestErrorCounter = 0;
 let duplicatedQuoteRequestCounter = 0;
 async function getQuote() {
-
 
     showLoadingSpiner()
     try {
@@ -46,7 +43,6 @@ async function getQuote() {
         requestErrorCounter += 1;
         requestErrorCounter < 20 ? getQuote() : alert('try again later!');
         console.log('whoops, no quote', error);
-        hideLoadingSpiner()
     }
     
 
@@ -92,5 +88,5 @@ function tweetQuote() {
 newQuoteBtn.addEventListener('click', getQuote);
 twitterBtn.addEventListener('click', tweetQuote);
 
+// Load Page
 getQuote()
-showLoadingSpiner()
