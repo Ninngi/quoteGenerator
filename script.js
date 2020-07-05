@@ -30,21 +30,26 @@ async function getQuote() {
         if (quoteTextIsDuplicated(responseData.quoteText)) {
             showLoadingSpiner()
             console.log('quote was duplicated')
-            duplicatedQuoteRequestCounter < 20 ? getQuote() : alert('try again later!')
+            duplicatedQuoteRequestCounter < 20 ? getQuote() : goTo404Page()
             
         } else {
             assingAuthorName(responseData)
             reduceFontSizeForLongQuote(responseData.quoteText)
             assingQuoteText(responseData)
             hideLoadingSpiner()
+            throw new Error('bub')
         }
         
     } catch (error) {
         requestErrorCounter += 1;
-        requestErrorCounter < 20 ? getQuote() : alert('try again later!');
+        requestErrorCounter < 20 ? getQuote() : goTo404Page();
         console.log('whoops, no quote', error);
     }
     
+    function goTo404Page()
+    {
+      window.location = '/404.html';   
+    }
 
     function quoteTextIsDuplicated(text) {
         return document.getElementById('quote').textContent === text 
